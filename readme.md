@@ -1,13 +1,8 @@
 Installation :
 
-    pip3 install venv
-    python -m venv Tweets
-    ./Tweets/scripts/activate
-    pip3 install twint
-    pip3 install --upgrade git+https://github.com/himanshudabas/twint.git@origin/twint-fixes#egg=twint
-    pip3 install flask
-    pip3 install flask
+    - pip install --no-cache-dir --upgrade -r requirements.txt
 
-
-Test :  
-    http://127.0.0.1:5000/api/tweets?topic=covid
+    Docker : 
+        - docker build --tag python-docker . 
+        Lancer le serveur 
+            - docker run -p 8080:5000 python-docker
