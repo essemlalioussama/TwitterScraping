@@ -1,0 +1,4 @@
+flask
+request2
+Flask-Jsonpify
+git+https://github.com/himanshudabas/twint.git@origin/twint-fixes#egg=twint
