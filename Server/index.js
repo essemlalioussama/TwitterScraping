@@ -17,4 +17,4 @@ const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST ;
 
 
-app.listen(PORT,HOST, () => console.log(`Server running on : http://${HOST}:${PORT} `));
+app.listen(PORT, () => console.log(`Server running on : ${PORT} `));

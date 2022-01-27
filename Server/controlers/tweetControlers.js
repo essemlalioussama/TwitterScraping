@@ -1,6 +1,9 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-const adresseServer = process.env.APITWINT;
+dotenv.config();
+
+const adresseServer = process.env.APITWINT || '127.0.0.1';
 const port = process.env.PORTAPITWINT || 5000;
 export const getTweets = async (req,res)=>{
   try {
