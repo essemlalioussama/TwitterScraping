@@ -10,7 +10,7 @@
 
                   - docker build --tag python-docker .  
 
-                  - docker run -p 8080:5000 python-docker
+                  - docker run -p 5000:5000 python-docker
 
               NodeJs API: 
 
