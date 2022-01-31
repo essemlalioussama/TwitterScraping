@@ -1,6 +1,9 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import redis from 'redis';
+import fs  from 'fs';
+const fichier = fs.readFileSync('controlers/cities.json')
+
 
 dotenv.config();
 
@@ -15,8 +18,11 @@ const port = process.env.PORTAPITWINT || 5000;
 // cache middlewares
 
 export const cacheTweets = (req,res,next)=>{
-  const searchObject = req.body;
-  client.get(searchObject.city,(err,data)=>{
+  let city = req.params.city;
+  let {topic,limit}= req.query
+  let searchObject = {topic:topic,city : city,limit : limit};
+  console.log(searchObject);
+  client.get(`${searchObject.topic}.${searchObject.city}`,(err,data)=>{
     if(err) throw err;
     if(data !== null){
       res.status(200).json(JSON.parse(data));
@@ -27,7 +33,7 @@ export const cacheTweets = (req,res,next)=>{
 }
 
 export const tweetNumberCache = (req,res,next)=>{
-  const {topic} = req.body;
+  let topic = req.query.topic;
   client.get(topic,(err,data)=>{
     if(err) throw err;
     if(data !== null){
@@ -42,7 +48,10 @@ export const tweetNumberCache = (req,res,next)=>{
 
 export const getTweets = async (req,res)=>{
   try {
-    let searchObject = req.body;
+    let city = req.params.city;
+    let {topic,limit}= req.query
+    let searchObject = {topic:topic,city : city,limit : limit};
+    console.log(searchObject);
          await axios.post(`http://${adresseServer}:${port}/tweets`, searchObject)
             .then( result => {
 
@@ -50,10 +59,14 @@ export const getTweets = async (req,res)=>{
 
               // store Tweets in Redis
               if(searchObject.city)
-                client.setex(searchObject.city, 600,JSON.stringify(data));
+                client.setex(`${searchObject.topic}.${searchObject.city}`, 600,JSON.stringify({
+                  ...searchObject,
+                  tweets:data}));
 
               // send a respond
-              res.status(200).json(data);
+              res.status(200).json({
+                ...searchObject,
+                tweets:data});
               
             })
             .catch(error => {
@@ -70,7 +83,9 @@ export const getTweets = async (req,res)=>{
 
 export const tweetCount = async (req,res)=>{
     try {
-    let {topic,cities} = req.body;
+    let topic = req.query.topic;
+    console.log(topic);
+    let cities = JSON.parse(fichier)
      for(const elt of cities) {
          await axios.post(`http://${adresseServer}:${port}/tweets/${elt.city}`, {'topic': topic})
             .then( result => {

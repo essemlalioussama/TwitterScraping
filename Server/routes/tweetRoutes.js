@@ -5,8 +5,8 @@ import {tweetCount, getTweets,cacheTweets,tweetNumberCache } from "../controlers
 
 const router = express.Router();
 
-router.post('/tweetsCount',tweetNumberCache,tweetCount);
+router.get('/tweetsCount',tweetNumberCache,tweetCount);
 
-router.post('/tweets',cacheTweets,getTweets);
+router.get('/tweets/:city',cacheTweets,getTweets);
 
 export default router;

@@ -1,0 +1,32 @@
+[ {
+    "id": "Paris",
+    "name": "Paris",
+    "lat": 48.8588336,
+    "lng": 2.2769952
+},{
+  "id": "Marseille",
+  "name": "Marseille",
+  "lat": 43.2802598,
+  "lng": 5.240564
+},{
+    "id": "Nantes",
+    "name": "Nantes",
+    "lat": 47.2382114,
+    "lng": -1.6303744
+  },{
+    "id": "Lyon",
+    "name": "Lyon",
+    "lat": 45.7579293,
+    "lng": 4.7650902
+  },{
+    "id": "Bourges",
+    "name": "Bourges",
+    "lat": 47.0780138,
+    "lng": 2.32825
+  },{
+    "id": "Bordeaux",
+    "name": "Bordeaux",
+    "lat": 44.8636964,
+    "lng": -0.656052
+  }
+]
