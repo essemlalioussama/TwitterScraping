@@ -1,2 +1,3 @@
-./Server/node_modules
-./TweetMap/node_modules
+/Server/node_modules
+/TweetMap/node_modules
+/twitmap/node_modules
